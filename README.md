@@ -1,3 +1,30 @@
+## Apple TV2 Development
+
+### Requirements
+- [Jailbroken](http://blog.firecore.com/11550) AppleTV running iOS 6  (Version 5.3)
+- SSH Access (Remember to change your root password)
+
+### Resources
+
+- [HelloWorldPlugin for iOS 6 using Theos/Logos](https://github.com/lechium/HelloWorld_ATVBlack6)
+- [Theos installation instructions](http://www.reddit.com/r/jailbreak/comments/20nxy8/flex_to_mobilesubstrate_a_beginners_guide_to/), ignore the rest.
+- [libsubstrate.dylib and substrate.h](https://github.com/kokoabim/iOSOpenDev) here.
+- [Logos Documentation](http://iphonedevwiki.net/index.php/Logos) for writing Jailbreak and late binding code
+- [Theos Build System Documentation](https://github.com/theiostream/theos-ref)
+- [NSHipster Article on BackRow](http://www.nshipster.com/backrow)
+- [AppleTV Private Headers](https://github.com/lechium/appletv-private-headers)
+- [Excellent Apple TV project example](https://github.com/alloy/UitzendingGemist-ATV2) but for iOS 5. Still a great reference to roughly understand the BackRow Classes
+
+###Writing ARC in an MRC world
+
+Due to the fact that iOS 6 has all the `BackRow` classes embedded into the `AppleTV.app`, we have to use runtime subclassing, associated objects, etc. which is what `theos/logos` helps us do.  The `theos` build system compiles using GCC, there by forcing us to use MRC. 
+
+In order to work around this issue, we can separately compile our application specific code as a static library with ARC enabled and link to the plugin at compile time. Instantiating these objects can be done in the same manner as we do with creating objects at runtime: `objc_getClass`.
+
+-------------------------------------------------------------------------------------
+
+## Original Documentation
+
 AppleTV HelloWorld plugin for AppleTV 2, pretty self explanatory.
 
 **iOS 6 notes**
